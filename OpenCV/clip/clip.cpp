@@ -16,6 +16,9 @@ int main() {
     cv::Mat center;
     cv::Mat gray;  
 
+    std::default_random_engine generator;  
+    std::uniform_int_distribution<int> colorDistribution(0, 255);  
+
     cv::cvtColor(srcMat, gray, cv::COLOR_BGR2GRAY);  
 	cv::threshold(gray, resMat, 100, 255, THRESH_OTSU);
 	cv::bitwise_not(resMat, resover);
@@ -35,12 +38,16 @@ int main() {
 			rect.width = Matstate.at<int>(i, 2);
 			rect.height = Matstate.at<int>(i, 3);
 
-            cv::rectangle(srcMat, rect,cv::Scalar(0, 0, 200),2,8,0); 
+            int b = colorDistribution(generator);  
+            int g = colorDistribution(generator);  
+            int r = colorDistribution(generator);  
+
+            cv::rectangle(srcMat, rect,cv::Scalar(b, g, r),2,8,0); 
 
             std::stringstream ss;  
             ss << " " << (++totalClips);  
             cv::putText(srcMat, ss.str(), cv::Point(rect.x + 5, rect.y + 20),  
-            cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 200), 2);  
+            cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(b, g, r), 2);  
         }
     }
     
