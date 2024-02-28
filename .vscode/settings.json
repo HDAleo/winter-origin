@@ -60,5 +60,6 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "/home/hda/2024winter/OpenCV/mask"
 }
